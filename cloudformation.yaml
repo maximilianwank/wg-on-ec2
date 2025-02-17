@@ -29,12 +29,12 @@ Resources:
       SecurityGroups:
         - !Ref SecurityGroupWireguardServer
       KeyName: !Ref KeyName
-    Metadata:
-      AWS::CloudFormation::Init:
-        config:
-          packages:
-            apt:
-              wireguard-tools: []
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -ex
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y wireguard
 
 
   SecurityGroupWireguardServer:
