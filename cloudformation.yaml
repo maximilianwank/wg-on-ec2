@@ -37,7 +37,7 @@ Resources:
           apt-get install -y wireguard
 
 
-  SecurityGroupWireguardServer:
+  WireguardSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties: 
       GroupDescription: Enable SSH access via port 22 from the specified IP address and WireGuard access via port 51820
