@@ -1,0 +1,57 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an EC2 instance with Ubuntu 24.04 and WireGuard installed
+
+Parameters:
+  SSHLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances - see https://checkip.amazonaws.com/
+    Type: String
+    MinLength: 10
+    MaxLength: 18
+    Default: 0.0.0.0/32
+    AllowedPattern: "(\\d{1,3}\\.){3}\\d{1,3}/32"
+    ConstraintDescription: Must be a valid IP CIDR range of the form x.x.x.x/32
+  KeyName:
+    Description: The name of the SSH key pair to allow access to the EC2 instance
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: Must be the name of an existing EC2 KeyPair
+
+
+Resources:
+  WireguardServer:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      InstanceType: t4g.nano
+      ImageId: ami-000b4fe7b39432646  # Ubuntu 24.04
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: 8
+      SecurityGroups:
+        - !Ref SecurityGroupWireguardServer
+      KeyName: !Ref KeyName
+    Metadata:
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            apt:
+              wireguard-tools: []
+
+
+  SecurityGroupWireguardServer:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties: 
+      GroupDescription: Enable SSH access via port 22 from the specified IP address and WireGuard access via port 51820
+      SecurityGroupIngress: 
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: !Ref SSHLocation
+        - IpProtocol: udp
+          FromPort: '51820'
+          ToPort: '51820'
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  PublicIP:
+    Description: The Public IP address of the EC2 instance
+    Value: !GetAtt WireguardServer.PublicIp
