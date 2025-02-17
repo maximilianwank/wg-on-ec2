@@ -12,7 +12,7 @@ ListenPort = 51820
 
 [Peer]
 PublicKey = $(cat /etc/wireguard/publickey)
-AllowedIPs = 10.0.0.2/24
+AllowedIPs = 10.0.0.2/32
 EOF
 
 # Enable IP forwarding
