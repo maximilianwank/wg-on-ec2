@@ -20,5 +20,4 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
 # Start and enable WireGuard
-wg-quick up wg0
 systemctl enable wg-quick@wg0

@@ -27,7 +27,7 @@ Resources:
           Ebs:
             VolumeSize: 8
       SecurityGroups:
-        - !Ref SecurityGroupWireguardServer
+        - !Ref WireguardSecurityGroup
       KeyName: !Ref KeyName
       UserData:
         Fn::Base64: !Sub |
@@ -35,6 +35,9 @@ Resources:
           apt-get update -y
           apt-get upgrade -y
           apt-get install -y wireguard
+
+          # Configure WireGuard server
+          curl https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/scripts/1_setup_server.sh | bash
 
 
   WireguardSecurityGroup:
