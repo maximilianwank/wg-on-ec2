@@ -1,5 +1,5 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to create an EC2 instance with Ubuntu 24.04 and WireGuard installed
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation template to create an EC2 instance with WireGuard installed and preconfigured
 
 Parameters:
   SSHLocation:
@@ -18,7 +18,7 @@ Parameters:
 
 Resources:
   WireguardServer:
-    Type: 'AWS::EC2::Instance'
+    Type: "AWS::EC2::Instance"
     Properties: 
       InstanceType: t4g.nano
       ImageId: ami-000b4fe7b39432646  # Ubuntu 24.04
@@ -38,21 +38,27 @@ Resources:
 
           # Configure WireGuard
           curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/configure_and_start_wireguard.sh | bash
+      Tags:
+        - Key: Name
+          Value: WireguardServer
 
 
   WireguardSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties: 
       GroupDescription: Enable SSH access via port 22 from the specified IP address and WireGuard access via port 51820
       SecurityGroupIngress: 
         - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
+          FromPort: "22"
+          ToPort: "22"
           CidrIp: !Ref SSHLocation
         - IpProtocol: udp
-          FromPort: '51820'
-          ToPort: '51820'
+          FromPort: "51820"
+          ToPort: "51820"
           CidrIp: 0.0.0.0/0
+    Tags:
+      - Key: Name
+        Value: WireguardSecurityGroup
 
 Outputs:
   PublicIP:
