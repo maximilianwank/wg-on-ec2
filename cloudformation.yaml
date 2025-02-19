@@ -38,7 +38,7 @@ Resources:
           apt-get install -y wireguard qrencode zip
 
           # Configure WireGuard
-          curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/configure_and_start_wireguard.sh | bash
+          curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/main/configure_and_start_wireguard.sh | bash
 
           # Restart server
           reboot
