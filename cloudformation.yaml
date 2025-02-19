@@ -26,6 +26,7 @@ Resources:
         - DeviceName: /dev/sda1
           Ebs:
             VolumeSize: 8
+      PropagateTagsToVolumeOnCreation: true
       SecurityGroups:
         - !Ref WireguardSecurityGroup
       KeyName: !Ref KeyName
@@ -56,9 +57,9 @@ Resources:
           FromPort: "51820"
           ToPort: "51820"
           CidrIp: 0.0.0.0/0
-    Tags:
-      - Key: Name
-        Value: WireguardSecurityGroup
+      Tags:
+        - Key: Name
+          Value: WireguardSecurityGroup
 
 Outputs:
   PublicIP:
