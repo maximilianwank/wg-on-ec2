@@ -64,5 +64,6 @@ zip /etc/wireguard/clients.zip /etc/wireguard/client_*.conf /etc/wireguard/clien
 mv /etc/wireguard/clients.zip /home/ubuntu/clients.zip
 chown ubuntu:ubuntu /home/ubuntu/clients.zip
 
-# Start and enable WireGuard
+# Enable and start WireGuard
 systemctl enable wg-quick@wg0
+systemctl start wg-quick@wg0
