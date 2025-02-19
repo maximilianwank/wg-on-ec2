@@ -27,6 +27,9 @@ Endpoint = $2:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 EOF
+
+    # Generate a QR code of the client configuration file
+    qrencode -t png -o /etc/wireguard/client_${idx}.png < /etc/wireguard/client_${idx}.conf
 }
 
 # Generate server keys
@@ -56,5 +59,10 @@ do
     add_client $i $server_public_ip
 done
 
+# Create a zip archive with all client configurations and QR codes
+zip /etc/wireguard/clients.zip /etc/wireguard/client_*.conf /etc/wireguard/client_*.png
+mv /etc/wireguard/clients.zip /home/ubuntu/clients.zip
+chown ubuntu:ubuntu /home/ubuntu/clients.zip
+
 # Start and enable WireGuard
-# systemctl enable wg-quick@wg0
+systemctl enable wg-quick@wg0

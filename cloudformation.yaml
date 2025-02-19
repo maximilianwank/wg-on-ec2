@@ -34,9 +34,9 @@ Resources:
           #!/bin/bash -ex
           apt-get update -y
           apt-get upgrade -y
-          apt-get install -y wireguard
+          apt-get install -y wireguard qrencode zip
 
-          # Configure WireGuard server
+          # Configure WireGuard
           curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/configure_and_start_wireguard.sh | bash
 
 
