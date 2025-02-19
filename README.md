@@ -27,6 +27,6 @@ As mentioned above, there is almost nothing to configure except the source IP ad
 * The lack of configuration options is considered a feature of this project - a more flexible approach can be found in the repositorty [wireguard-on-ec2](https://github.com/LINALIN1979/wireguard-on-ec2) by [LINALIN1979](https://github.com/LINALIN1979).
 * It's generally a bad idea to pipe scripts from the internet directly to `bash`.
 
-## Feedback & Contributions
+## :handshake: Feedback & Contributions
 
 Any kind of feedback or contributions are welcome!
