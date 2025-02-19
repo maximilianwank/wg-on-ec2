@@ -1,13 +1,14 @@
 #!/bin/bash -ex
 
-function add_client() {  # first argument is the index of the client, second the server public IP
+# Function to add a client to the WireGuard configuration and create configs including QR codes
+function add_client() {  # First argument is the index of the client, second the server public IP
     # use printf to pad the index with zeros for the filenames
     local idx=$(printf "%03d" $1)
 
     # Generate client keys
     wg genkey | tee /etc/wireguard/client_${idx}_private.key | wg pubkey > /etc/wireguard/client_${idx}_public.key
 
-    # Add client configuration to WireGuard configuration file
+    # Add client configuration to server configuration file
     cat <<EOF >> /etc/wireguard/wg0.conf
 [Peer]
 PublicKey = $(cat /etc/wireguard/client_${idx}_public.key)
