@@ -1,6 +1,6 @@
 # :dragon: wg-on-ec2
 
-Create a WireGuard® server with as little configuration as possible.
+Create a [WireGuard®](https://www.wireguard.com/) server with as little configuration as possible.
 
 ## :receipt: Short Description
 
@@ -19,7 +19,7 @@ As mentioned above, there is almost nothing to configure except the source IP ad
 2. Go to CloudFormation and upload the CloudFormation template `cloudformation.yaml`.
 3. Specify the key and [IP address](https://checkip.amazonaws.com/) for the SSH connection later.
 4. Create the CloudFormation stack.
-5. After a while there will be a zip archive `/home/ubuntu/clients.zip` containing 255 client configurations (each as a file and a QR code). Use for example `scp` to download it.
+5. After a while there will be a zip archive on the EC2 instance at `/home/ubuntu/clients.zip` containing 255 client configurations (each as a file and a QR code). Use for example `scp` to download it.
 6. Unpack the zip archive and distribute the client configurations.
 
 ## :point_up: Remarks
