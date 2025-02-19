@@ -39,6 +39,9 @@ Resources:
 
           # Configure WireGuard
           curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/configure_and_start_wireguard.sh | bash
+
+          # Restart server
+          reboot
       Tags:
         - Key: Name
           Value: WireguardServer
