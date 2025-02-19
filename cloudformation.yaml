@@ -37,7 +37,7 @@ Resources:
           apt-get install -y wireguard
 
           # Configure WireGuard server
-          curl https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/scripts/1_setup_server.sh | bash
+          curl -s https://raw.githubusercontent.com/maximilianwank/wg-on-ec2/refs/heads/dev/configure_and_start_wireguard.sh | bash
 
 
   WireguardSecurityGroup:
