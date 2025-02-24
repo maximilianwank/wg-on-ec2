@@ -19,6 +19,8 @@ Mappings:
   ImageByRegion:
     eu-central-1:  # Frankfurt
       ImageId: ami-000b4fe7b39432646
+    ap-northeast-3:  # Osaka
+      ImageId: ami-068f4a4d19bc7b838
 
 Resources:
   WireguardServer:
