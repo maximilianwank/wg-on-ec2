@@ -25,6 +25,7 @@ As mentioned above, there is almost nothing to configure except the source IP ad
 ## :point_up: Remarks
 
 * Keep in mind that using this VPN does not make you anonymous when surfing the web. The IP address of the server is still exposed and can easily be linked to your AWS account (including payment information, the source IP for the deployment of the server, ...).
+* The supported AWS regions are to be expanded step by step, the current list can be found in the [CloudFormation template](https://github.com/maximilianwank/wg-on-ec2/blob/main/cloudformation.yaml#L19).
 * The lack of configuration options is considered a feature of this project - a more flexible approach can be found in the repositorty [wireguard-on-ec2](https://github.com/LINALIN1979/wireguard-on-ec2) by [LINALIN1979](https://github.com/LINALIN1979).
 * It's generally a bad idea to pipe scripts from the internet directly to `bash`.
 
