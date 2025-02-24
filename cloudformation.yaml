@@ -15,13 +15,17 @@ Parameters:
     Type: AWS::EC2::KeyPair::KeyName
     ConstraintDescription: Must be the name of an existing EC2 KeyPair
 
+Mappings:
+  ImageByRegion:
+    eu-central-1:  # Frankfurt
+      ImageId: ami-000b4fe7b39432646
 
 Resources:
   WireguardServer:
     Type: "AWS::EC2::Instance"
     Properties: 
       InstanceType: t4g.nano
-      ImageId: ami-000b4fe7b39432646  # Ubuntu 24.04
+      ImageId: !FindInMap [ImageByRegion, !Ref AWS::Region, ImageId]
       BlockDeviceMappings:
         - DeviceName: /dev/sda1
           Ebs:
@@ -45,7 +49,6 @@ Resources:
       Tags:
         - Key: Name
           Value: WireguardServer
-
 
   WireguardSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
